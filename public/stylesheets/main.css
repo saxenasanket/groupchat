@@ -1,0 +1,22 @@
+#buttonBox{
+	margin-bottom: 0px;
+	border: 1px solid black;
+}
+#dashArrow{
+	width: 25px;
+	height: 25px;
+}
+#profileName{
+	color: blue;
+	text-align: center;
+}
+#sideBar{
+	border: 1px solid black;
+}
+#profilePic{
+	width: 100px;
+	height:100px;
+}
+#mainContent{
+	border: 1px solid black;
+}
