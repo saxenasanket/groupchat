@@ -1,11 +1,11 @@
 
 var express     = require("express"),
     app         = express(),
-    bodyParser  = require("body-parser"),
-    mongoose    = require("mongoose")
+    bodyParser  = require("body-parser")
+   
   
     
-mongoose.connect("mongodb://localhost/gc-db");
+
 app.use(bodyParser.urlencoded({extended: true}));
 app.set("view engine", "ejs");
 app.use(express.static(__dirname));
