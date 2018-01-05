@@ -1,10 +1,13 @@
 #buttonBox{
-	margin-bottom: 0px;
-	border: 1px solid black;
+	border-top: 1px solid black;
+	height: 10%;
+	position: absolute;
+	left: 0;right: 0;
+	bottom: 0;
+	z-index: -1;
 }
 #dashArrow{
-	width: 25px;
-	height: 25px;
+	height: 50px;
 }
 #profileName{
 	color: blue;
@@ -15,8 +18,8 @@
   position: fixed;
   top:0; left:0; bottom:0;
   z-index: -1;
+  padding: 0px;
 }
-#profilePic{
-	width: 100px;
-	height:100px;
+.profilePic{
+	width: 50%;
 }
