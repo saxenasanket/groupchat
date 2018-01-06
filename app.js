@@ -36,6 +36,17 @@ app.get("/", function(req, res){
     res.render("home");
 });
 
+// game section
+
+app.get("/games/2048", function(req, res){
+    res.render("2048");
+});
+
+app.post("/game/2048", function(req, res){
+   res.render("games/2048");
+});
+
+//game section ended
 
 
 
