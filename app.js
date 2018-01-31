@@ -2,14 +2,32 @@
 var express       = require("express"),
     app           = express(),
     bodyParser    = require("body-parser"),
-    mongoose      = require("mongoose"),
+    //mongoose      = require("mongoose"),
     passport      = require("passport"),
     LocalStrategy = require("passport-local"),
-    User          = require("./models/user")
+    User          = require("./models/user"),
+    mysql         = require('mysql');
    
+var con = mysql.createConnection({
+  host: "localhost",
+  user: "root",
+  password: "root",
+  database: "GROUPCHAT"
+});
+
+con.connect(function(err) {
+  if (err) throw err;
+  console.log("Connected!");
+  var sql = "SELECT * FROM USERS";
+              
+   con.query(sql, function (err, result) {
+     if (err) throw err;
+     console.log(result);
+   });
+});
   
     
-mongoose.connect("mongodb://localhost/_Group_Chat");
+//mongoose.connect("mongodb://localhost/_Group_Chat");
 app.use(bodyParser.urlencoded({extended: true}));
 app.set("view engine", "ejs");
 app.use(express.static(__dirname));
@@ -59,20 +77,35 @@ app.post("/game/2048", function(req, res){
 app.get("/register", function(req, res){
    res.render("register"); 
 });
+
+
 //handle sign up logic
 app.post("/register", function(req, res){
     var newUser = new User({username: req.body.username});
-    User.register(newUser, req.body.password, function(err, user){
-    	console.log("hello");
-        if(err){
-            console.log(err);
-            return res.render("register");
-        }
-        passport.authenticate("local")(req, res, function(){
-           res.redirect("/"); 
-        });
-    });
+
+
+    var sql = "INSERT INTO USERS (USERNAME,PASS) VALUES ('" + req.body.username + "','" + req.body.password + "')";
+    console.log(sql);
+    //var userData = [ [req.body.username, req.body.password] ];
+  con.query(sql, function (err, result) {
+    if (err) throw err;
+    console.log("1 record inserted");
+    res.redirect("/");
+  });
+
+
+    // User.register(newUser, req.body.password, function(err, user){
+    //  console.log("hello");
+    //     if(err){
+    //         console.log(err);
+    //         return res.render("register");
+    //     }
+    //     passport.authenticate("local")(req, res, function(){
+    //        res.redirect("/"); 
+    //     });
+    // });
 });
+
 
 // show login form
 app.get("/login", function(req, res){
